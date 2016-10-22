@@ -1,0 +1,34 @@
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act => "") ,class: "active" do%>
+          <span class="glyphicon glyphicon-home"></span> Home
+          <% end %>
+        </li>
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act => 'mieiDati') do%>
+          <span class="glyphicon glyphicon-user"></span> I Miei Dati
+          <% end %>
+        </li>
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act=>'miaRete') do%>
+          <span class="glyphicon glyphicon-globe"></span> Dati Di Rete
+          <% end %>
+        </li>
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act=>'utenzeTemporanee') do%>
+          <span class="glyphicon glyphicon-plus"></span> Utenze Temporanee
+          <% end %>
+        </li>
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act=>'visiteOspite') do%>
+          <span class="glyphicon glyphicon-calendar"></span> Visite Ospite
+          <% end %>
+        </li>
+        <li class="sidebar">
+          <%=link_to employee_path(session[:employee_id],:act=>'mioAccount') do%>
+          <span class="glyphicon glyphicon-pencil"></span> Il Mio Account
+          <% end %>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,70 @@
+<div class="jumbotron2 text-center">
+  <br>
+  <br>
+  <br>
+  <hr>
+  <div class="row" style="padding: 1em; height: 50%">
+
+    <div class="col-md-4" style="padding: 1em">
+      <%= link_to employee_path(session[:employee_id],:act => 'mieiDati'),class: "btn btn-danger btn-xlarge",style: "width:90%" do%>
+        <span class="glyphicon glyphicon-user"></span><br/>
+         I Miei Dati
+      <%end%>
+    </div>
+
+    <div class="col-md-4" style="padding: 1em">
+    </div>
+
+    <div class="col-md-4" style="padding: 1em">
+      <%= link_to employee_path(session[:employee_id],:act => 'miaRete'),class: "btn btn-warning btn-xlarge" ,style: "width:90%" do%>
+        <span class="glyphicon glyphicon-globe"></span><br/>
+         La Mia Rete
+      <%end%>
+    </div>
+  </div>
+
+ <div class="row" style="padding: 1em; height: 50%">
+
+
+    <div class="col-md-4" style="padding: 1em">
+    </div>
+
+
+   <div class="col-md-4" style="padding: 1em">
+     <%= link_to employee_path(session[:employee_id],:act => 'utenzeTemporanee'),class: "btn btn-purple btn-xlarge" ,style: "width:90%" do%>
+       <span class="glyphicon glyphicon-plus"></span><br/>
+        Utenze<br>
+        temporanee
+      <%end%>
+    </div>
+
+    <div class="col-md-4" style="padding: 1em">
+    </div>
+
+  </div>
+
+
+  <div class="row" style="padding: 1em;height: 50%">
+
+    <div class="col-md-4" style="padding: 1em">
+      <%= link_to employee_path(session[:employee_id],:act => 'visiteOspite'),class: "btn btn-primary btn-xlarge",style: "width:90%" do%>
+        <span class="glyphicon glyphicon-calendar"></span><br/>
+         Visite Ospite
+      <%end%>
+    </div>
+
+    <div class="col-md-4" style="padding: 1em">
+    </div>
+
+    <div class="col-md-4" style="padding: 1em">
+      <%= link_to employee_path(session[:employee_id],:act => 'mioAccount'),class: "btn btn-success btn-xlarge",style: "width:90%" do%>
+        <span class="glyphicon glyphicon-pencil"></span><br/>
+        Il Mio Account
+      <%end%>
+    </div>
+    
+  </div>
+  <hr>
+</div>
+
+

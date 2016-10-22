@@ -1,0 +1,83 @@
+<% provide(:title, 'Sign up') %>
+
+<div class="jumbotron2 text-center">
+<h1>Sign up</h1>
+<hr>
+<p>Per creare un nuovo account compila il seguente form. Tutti i campi sono obbligatori.</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@employee, :url => {:action => "confirm"}) do |f| %>
+    
+      
+      <%= f.label :nome %>
+      <%= f.text_field :nome, class: "form-control" ,placeholder: 'nome'%>
+      <%= errors_for @employee, :nome %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :cognome %>
+      <%= f.text_field :cognome, class: "form-control"  ,placeholder: 'cognome'%>
+      <%= errors_for @employee, :cognome %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :sesso %>
+      <br>
+      <table class='tableSex' align="center">
+        <tr>  
+            <td><%= f.radio_button :sesso, 'M'%>
+            <%= label :sesso_M, 'M' %></td>
+            <td><%= f.radio_button :sesso, 'F' %>
+            <%= label :sesso_f, 'F' %></td>
+        </tr>
+      </table>
+      <%= errors_for @employee, :sesso %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :data_di_nascita %>
+      <%= f.date_field :dataNascita,class: 'form-control',:value => (f.object.dataNascita.strftime('%m/%d/%Y') if f.object.dataNascita) %>
+      <%= errors_for @employee, :dataNascita %><%if @employee.errors.any?%><br><%end%>
+      
+      
+      <%= f.label :nazione_di_nascita %>
+      <%= f.select :nazioneNascita,CountryStateSelect.countries_collection,{prompt: '--Seleziona la nazione di nascita--'},{:class=> 'form-control'} %>
+      <%= errors_for @employee, :nazioneNascita %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :regione_di_nascita%>
+      <%= f.select :regione,CountryStateSelect.collect_states(f.object.nazioneNascita),{prompt: '--Seleziona regione di nascita--'},{:class=> 'form-control'}%>
+      <%= errors_for @employee, :regione %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :citta_di_nascita %>
+      <%= f.select :luogoNascita, CountryStateSelect.collect_cities(f.object.nazioneNascita, f.object.regione),{prompt: '--Seleziona la citta di nascita--'},{:class=> 'form-control'}%>
+      <%= errors_for @employee, :luogoNascita %><%if @employee.errors.any?%><br><%end%>
+
+      <%= f.label :nazione_di_residenza %>
+      <%= f.select :nazioneResidenza, CountryStateSelect.countries_collection,{prompt: '--Seleziona la nazione di residenza--'},{:class=> 'form-control'} %>
+      <%= errors_for @employee, :nazioneResidenza %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :regione_di_residenza%>
+      <%= f.select :regioneResidenza, CountryStateSelect.collect_states(f.object.nazioneResidenza),{prompt: '--Seleziona la regione di residenza--'},{:class=> 'form-control'}%>
+      <%= errors_for @employee, :regioneResidenza %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :citta_di_residenza %>
+      <%= f.select :cittaResidenza, CountryStateSelect.collect_cities(f.object.nazioneResidenza, f.object.regioneResidenza),{prompt: '--Seleziona la città di residenza--'},{:class=> 'form-control'}%>
+      <%= errors_for @employee, :cittaResidenza %><%if @employee.errors.any?%><br><%end%>
+      
+      <%= f.label :indirizzo %>
+      <%= f.text_field :indirizzo ,class: "form-control",placeholder: 'via/piazza roma 15'%>
+      <%= errors_for @employee, :indirizzo %><%if @employee.errors.any?%><br><%end%>
+
+      
+      <%= f.label :email %>
+      <%= f.text_field :email , class: "form-control" , placeholder: 'example@gmail.com'%>
+      <%= errors_for @employee, :email %><%if @employee.errors.any?%><br><%end%>
+  
+      <%= f.label :password %>
+      <%= f.password_field :password ,class: "form-control"%>
+      <%= errors_for @employee, :password %><%if @employee.errors.any?%><br><%end%>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation,class: "form-control" %>
+      <%= errors_for @employee, :password_confirmation %><%if @employee.errors.any?%><br><%end%>
+
+      <br>
+      <%= f.submit "Create my account", class: "btn btn-primary btn-color" %>
+    <% end %>
+  </div>
+</div>
+</div>

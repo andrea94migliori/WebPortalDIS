@@ -1,0 +1,14 @@
+development:
+  :address: smtp.o2.ie
+  :port: 25
+  :authentication: nil
+  :user_name: xxx
+  :password: yyy
+  :enable_starttls_auto: true
+production:
+  :address: smtp.o2.ie
+  :port: 25
+  :authentication: nil
+  :user_name: xxx
+  :password: yyy
+  :enable_starttls_auto: true

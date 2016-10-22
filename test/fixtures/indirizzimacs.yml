@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tau_manifesto:
+  hostname: "MyString1"
+  macAddress: "00-07-74-4C-7F-1D"
+  dispositivo: "PC"
+  connessione: "Wi-Fi"
+  vlan: "Informatica"
+  created_at: <%= 3.years.ago %>
+
+
+cat_video:
+  hostname: "MyString2"
+  macAddress: "03-07-74-4C-7F-1D"
+  dispositivo: "PC"
+  connessione: "Wi-Fi"
+  vlan: "Informatica"
+  created_at: <%= 2.hours.ago %>
+
+
+orange:
+  hostname: "MyString"
+  macAddress: "00-08-74-4C-7F-1D"
+  dispositivo: "PC"
+  connessione: "Wi-Fi"
+  vlan: "Informatica"
+  created_at: <%= 10.minutes.ago %>
+
+most_recent:
+  hostname: "MyString4"
+  macAddress: "00-08-76-4C-7F-1D"
+  dispositivo: "PC"
+  connessione: "Wi-Fi"
+  vlan: "Informatica"
+  created_at: <%= Time.zone.now %>

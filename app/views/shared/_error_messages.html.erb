@@ -1,0 +1,15 @@
+<% if @employee.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@employee.errors.count, "error") %>.
+    </div>
+  </div>
+<% end %>
+<% if @indirizzimac.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      The form contains <%= pluralize(@indirizzimac.errors.count, "error") %>.Open the modal for more details
+    </div>
+  </div>
+<% end %>

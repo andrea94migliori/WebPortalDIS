@@ -1,0 +1,82 @@
+<div class="jumbotron2">
+     <br><br>
+     <h1>Riepilogo dati</h1>
+     <hr>
+     <div class="panel2">
+     <div class="panel-body2">
+         <%= render 'shared/error_acceptanceMessage' %>
+         <table>
+          <tr>
+            <td><p class="riep">nome:</p></td>
+            <td><%= @employee.nome %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">cognome:</p></td>
+            <td><%= @employee.cognome %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">sesso:</p></td>
+            <td><%= @employee.sesso %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">data di nascita:</p></td>
+            <td><%= @employee.dataNascita %></td>    
+          </tr>
+          <tr>
+              <td><p class="riep">nazioneNascita:</p></td>
+            <td><%= @employee.nazioneNascita %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">citta di nascita:</p></td>
+            <td><%= @employee.luogoNascita %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">nazione di residenza:</p></td>
+            <td><%= @employee.nazioneResidenza %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">citta di residenza:</p></td>
+            <td><%= @employee.cittaResidenza %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">indirizzo:</p></td>
+            <td><%= @employee.indirizzo %></td>
+          </tr>
+          <tr>
+              <td><p class="riep">tipo di account:</p></td>
+            <td><%= @employee.tipoAccount %></td>
+          </tr>
+
+          <tr>
+              <td><p class="riep">email:</p></td>
+            <td><%= @employee.email %></td>
+          </tr>
+         </table>
+         <br>
+         <a href="/">Termini e condizioni di utilizzo</a>
+         <br>
+         <%= form_for @employee do |f| %>
+         
+         <%= f.hidden_field :nome,:value => @employee.nome  %>
+         <%= f.hidden_field :cognome,:value => @employee.cognome %>
+         <%= f.hidden_field :sesso,:value => @employee.sesso %>
+         <%= f.hidden_field :dataNascita,:value => @employee.dataNascita %>
+         <%= f.hidden_field :nazioneNascita,:value => @employee.nazioneNascita %>
+         <%= f.hidden_field :regione,:value => @employee.regione %>
+         <%= f.hidden_field :luogoNascita,:value => @employee.luogoNascita %>
+         <%= f.hidden_field :nazioneResidenza,:value => @employee.nazioneResidenza %>
+         <%= f.hidden_field :regioneResidenza,:value => @employee.regioneResidenza %>
+         <%= f.hidden_field :cittaResidenza,:value => @employee.cittaResidenza %>
+         <%= f.hidden_field :indirizzo,:value => @employee.indirizzo %>
+         <%= f.hidden_field :tipoAccount,:value => @employee.tipoAccount %>
+         <%= f.hidden_field :email,:value => @employee.email %>
+         <%= f.hidden_field :password,:value => @employee.password %>
+         <%= f.hidden_field :password_confirmation,:value => @employee.password_confirmation %>
+         <%= f.check_box :terms_of_service %>
+         <%=label_tag 'accept', 'Accetto'%>
+         <br>
+         <%=submit_tag "Invia",class: "btn btn-primary"%>
+         <% end %>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<%if params[:dispositivo].present?%>
+  
+  <%= link_to employee_path(session[:employee_id],:act => 'miaRete',:dispositivo=>params[:dispositivo],:order=>'asc',:subject=>'dispositivo') do%>
+    <span class="glyphicon glyphicon-chevron-up" style=" color:white !important"></span>
+  <%end%>
+  <%= link_to employee_path(session[:employee_id],:act => 'miaRete',:dispositivo=>params[:dispositivo],:order=>'desc',:subject=>'dispositivo') do%>
+    <span class="glyphicon glyphicon-chevron-down" style=" color:white !important"></span>
+  <%end%>
+    
+<%else%>
+  <%= link_to employee_path(session[:employee_id],:act => 'miaRete',:order=>'asc',:subject=>'dispositivo') do%>
+    <span class="glyphicon glyphicon-chevron-up" style=" color:white !important"></span>
+  <%end%>
+  <%= link_to employee_path(session[:employee_id],:act => 'miaRete',:order=>'desc',:subject=>'dispositivo') do%>
+    <span class="glyphicon glyphicon-chevron-down" style=" color:white !important"></span>
+  <%end%>
+  
+<%end%>

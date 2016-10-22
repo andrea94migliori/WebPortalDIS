@@ -1,0 +1,83 @@
+<div class="jumbotron3 text-center">
+  <div class="row">
+    <h1>La Mia Rete</h1>
+    <hr>
+    <%=render :partial =>"layouts/sidebar"%>
+    <div class="panel3">
+      <div class="panel-body">
+        <% if logged_in? %>
+          <%=render :partial =>"shared/indirizzimac_form"%>
+          <a class="btn icon-btn btn-success pos" data-toggle="modal" data-target="#myModal">
+          <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+          Aggiungi Macaddress
+          </a>
+                <% if @employee.indirizzimacs.any?%>
+                  <br>
+                  <br>
+                  <%= link_to image_tag("all.png") ,employee_path(session[:employee_id],:act => 'miaRete')%>   
+                  <%= link_to image_tag("pc.png"),employee_path(session[:employee_id],:act => 'miaRete', :dispositivo=> 'PC')%>
+                  <%= link_to image_tag("tablet.png"),employee_path(session[:employee_id],:act => 'miaRete', :dispositivo=> 'Tablet')%>
+                  <%= link_to image_tag("phone.png"),employee_path(session[:employee_id],:act => 'miaRete', :dispositivo=> 'Telefono')%>
+                  <br>
+                  <br>
+                  <table class="table2" id='mac'>
+                    <tr>
+                      <th></th>
+                      <th>
+                          Hostname
+                          <%=render :partial =>"shared/updown_hostname"%>
+                      </th>
+                      <th>
+                          MacAddress
+                          <%=render :partial =>"shared/updown_macaddress"%>
+                      </th>
+                      <th>
+                          Dispositivo
+                          <br>
+                         <%=render :partial =>"shared/updown_dispositivo"%>
+                      </th>
+                      <th>
+                          Connessione
+                          <br>
+                          <%=render :partial =>"shared/updown_connessione"%>
+                      </th>
+                      <th>
+                          Vlan
+                          <br>
+                          <%=render :partial =>"shared/updown_vlan"%>
+                      </th>
+                    </tr>
+                  <% @indirizzimacs.each do |indirizzimac| %>
+                    <%if indirizzimac.hostname!=""%>
+                    <tr id='myRow'>
+                      <%= form_for(@indirizzimac) do |f| %>
+                      <td><%= f.submit "edit", class: "btn green"%></td>
+                      <td>
+                        <%= f.text_field :hostname, class: 'form-control',placeholder: indirizzimac.hostname %>
+                      </td>
+                      <td>
+                        <%= f.text_field :macAddress, class: 'form-control',placeholder: indirizzimac.macAddress %>
+                      </td>
+                      <td>
+                      <%= f.select(:dispositivo, [indirizzimac.dispositivo,'PC', 'Tablet','Telefono'],{} ,class: "form-control")%>
+                      </td>
+                      <td>
+                      <%= f.select(:connessione, [indirizzimac.connessione,'Wi-Fi', 'Ethernet'],{} ,class: "form-control")%>  
+                      </td>
+                      <td>
+                      <%= f.select(:vlan, [indirizzimac.vlan,'Informatica', 'Automatica','Gestionale'],{} ,class: "form-control")%>  
+                      </td>
+                      <td><%= link_to indirizzimac, method: :delete do%><span class='glyphicon glyphicon-remove' style=" color:red !important"></span><%end%></td>
+                      <%end%>
+                    </tr>
+                    <%end%>
+                  <%end%>
+                  </table>
+                  <br><br>
+                <%= link_to "Fine",employee_path(session[:employee_id],:act => 'miaRete'),class: "btn red btn2"%>
+        <% end %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

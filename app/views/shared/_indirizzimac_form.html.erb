@@ -1,0 +1,47 @@
+<%if @indirizzimac.errors.any? %>
+    <script>
+      open();
+    </script>
+<%end%>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Aggiungi Macaddress</h4>
+        </div>
+        <div class="modal-body">
+            <%= form_for(@indirizzimac) do |f| %>
+            <%= f.label :hostname %>
+            <%= f.text_field :hostname, class: "form-control", placeholder: "hostname"%>
+            <%= errors_for @indirizzimac, :hostname %><%if @indirizzimac.errors.any?%><br><%end%>
+      
+            <%= f.label :Macaddress %>
+            <%= f.text_field :macAddress, class: "form-control",placeholder: "08-A5-3C-50-7B-20" %>
+            <%= errors_for @indirizzimac, :macAddress %><%if @indirizzimac.errors.any?%><br><%end%>
+            
+            <%= f.label :connessione %>
+            <%= f.select(:connessione, ['Wi-Fi', 'Ethernet'],{prompt: 'seleziona connessione'} ,class: "form-control")%>
+            <%= errors_for @indirizzimac, :connessione %><%if @indirizzimac.errors.any?%><br><%end%>
+            
+            <%= f.label :dispositivo %>
+            <%= f.select(:dispositivo, ['PC', 'Tablet','Telefono','VirtualMachine','Server'],{prompt: 'Seleziona dispositivo '} ,class: "form-control")%>
+            <%= errors_for @indirizzimac, :dispositivo %><%if @indirizzimac.errors.any?%><br><%end%>
+            
+            <%= f.label :Vlan %>
+            <%= f.collection_select :vlan_id, Vlan.all, :id, :nome ,{prompt: 'Seleziona VLAN'},{:class=> "form-control"}%>
+            <%= errors_for @indirizzimac, :vlan_id %><%if @indirizzimac.errors.any?%><br><%end%>
+            
+            <%= f.submit "Post", class: "btn btn-primary red btn2" %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default red btn2" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
