@@ -7,8 +7,8 @@ class Visitor < ActiveRecord::Base
     valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
     #Relations in db
-    has_many :visits,       :dependent      :destroy
-    has_many :employees,    :through    =>  :visits
+    has_many    :visits,       dependent:      :destroy
+    belongs_to  :employee
     
     #Validations
     validates :nome,                presence: true,         length: { minimum: 2 , maximum:20 }
@@ -23,6 +23,7 @@ class Visitor < ActiveRecord::Base
     validates :matricola,           presence: true,         length: { maximum: 7 , minimum: 7 },                                            uniqueness: true
     validates :email,               presence: true,         length: { maximum: 243 },               format: { with: valid_email_regex },    uniqueness: { case_sensitive: false }
     validates :password,                                    length: { minimum: 6 }
+    validates :employee_id,         presence: true
     
     #Bcrypt
     has_secure_password
@@ -31,6 +32,10 @@ class Visitor < ActiveRecord::Base
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
         BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
+    end
+    
+    def full_name
+        "Nome: #{nome} Cognome: #{cognome} Matricola: #{matricola}"
     end
     
     

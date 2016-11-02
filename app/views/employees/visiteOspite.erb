@@ -1,10 +1,235 @@
 <div class="jumbotron3 text-center">
   <div class="row">
-    <h1>Le Mie Visite</h1>
+    <h1>Visite Ospite</h1>
     <hr>
 	<%=render :partial =>"layouts/sidebar"%>
     <div class="panel3">
-    	<div class="panel-body">
+        <div class="panel-body">
+            <% if logged_in? %>
+                <%=render :partial =>"shared/error_messages3"%>
+
+                <% if @visitor && @visitor.errors.any? %>
+                    <script>
+                        visitoropen();
+                    </script>
+                <%end%>
+
+                                            <!-- Modal for Visitor -->
+
+                <a class="btn icon-btn btn-success pos" data-toggle="modal" data-target="#visitorModal">
+                <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                Aggiungi Visitatore
+                </a>
+
+                <div id="visitorModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Aggiungi Visitatore</h4>
+                </div>
+
+                <div class="modal-body">
+
+                <%= form_for(@visitor) do |f| %>
+
+
+                <%= f.label :nome %>
+                <%= f.text_field :nome, class: "form-control" ,placeholder: 'nome'%>
+                <%= errors_for @visitor, :nome %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :cognome %>
+                <%= f.text_field :cognome, class: "form-control"  ,placeholder: 'cognome'%>
+                <%= errors_for @visitor, :cognome %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :sesso %>
+                <br>
+                <table class='tableSex' align="center">
+                <tr>
+                <td><%= f.radio_button :sesso, 'M'%>
+                <%= label :sesso_M, 'M' %></td>
+                <td><%= f.radio_button :sesso, 'F' %>
+                <%= label :sesso_f, 'F' %></td>
+                </tr>
+                </table>
+                <%= errors_for @visitor, :sesso %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :data_di_nascita %>
+                <%= f.date_field :dataNascita,class: 'form-control',:value => (f.object.dataNascita.strftime('%m/%d/%Y') if f.object.dataNascita) %>
+                <%= errors_for @visitor, :dataNascita %><%if @visitor.errors.any?%><br><%end%>
+
+
+                <%= f.label :nazione_di_nascita %>
+                <%= f.select :nazioneNascita,CountryStateSelect.countries_collection,{prompt: '--Seleziona la nazione di nascita--'},{:class=> 'form-control'} %>
+                <%= errors_for @visitor, :nazioneNascita %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :regione_di_nascita%>
+                <%= f.select :regione,CountryStateSelect.collect_states(f.object.nazioneNascita),{prompt: '--Seleziona regione di nascita--'},{:class=> 'form-control'}%>
+                <%= errors_for @visitor, :regione %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :citta_di_nascita %>
+                <%= f.select :luogoNascita, CountryStateSelect.collect_cities(f.object.nazioneNascita, f.object.regione),{prompt: '--Seleziona la citta di nascita--'},{:class=> 'form-control'}%>
+                <%= errors_for @visitor, :luogoNascita %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :nazione_di_residenza %>
+                <%= f.select :nazioneResidenza, CountryStateSelect.countries_collection,{prompt: '--Seleziona la nazione di residenza--'},{:class=> 'form-control'} %>
+                <%= errors_for @visitor, :nazioneResidenza %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :regione_di_residenza%>
+                <%= f.select :regioneResidenza, CountryStateSelect.collect_states(f.object.nazioneResidenza),{prompt: '--Seleziona la regione di residenza--'},{:class=> 'form-control'}%>
+                <%= errors_for @visitor, :regioneResidenza %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :citta_di_residenza %>
+                <%= f.select :cittaResidenza, CountryStateSelect.collect_cities(f.object.nazioneResidenza, f.object.regioneResidenza),{prompt: '--Seleziona la città di residenza--'},{:class=> 'form-control'}%>
+                <%= errors_for @visitor, :cittaResidenza %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :indirizzo %>
+                <%= f.text_field :indirizzo ,class: "form-control",placeholder: 'via/piazza roma 15'%>
+                <%= errors_for @visitor, :indirizzo %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :matricola %>
+                <%= f.text_field :matricola ,class: "form-control",placeholder: '1234567'%>
+                <%= errors_for @visitor, :matricola %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :email %>
+                <%= f.text_field :email , class: "form-control" , placeholder: 'example@gmail.com'%>
+                <%= errors_for @visitor, :email %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :password %>
+                <%= f.password_field :password ,class: "form-control"%>
+                <%= errors_for @visitor, :password %><%if @visitor.errors.any?%><br><%end%>
+
+                <%= f.label :password_confirmation, "Confirmation" %>
+                <%= f.password_field :password_confirmation,class: "form-control" %>
+                <%= errors_for @visitor, :password_confirmation %><%if @visitor.errors.any?%><br><%end%>
+
+                <br>
+                <%= f.submit "Crea l'account visitatore", class: "btn btn-primary btn-color" %>
+                <% end %>
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+
+                </div>
+                </div>
+                </div>
+                <% end %>
+
+
+                                                    <!-- Modal for Visit -->
+                <% if logged_in? %>
+                <%=render :partial =>"shared/error_messages4"%>
+
+
+                <a class="btn icon-btn btn-success pos" data-toggle="modal" data-target="#visitModal">
+                <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+                Aggiungi Visita
+                </a>
+
+                <div id="visitModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Aggiungi Visita</h4>
+                </div>
+
+                <div class="modal-body">
+                <%= form_for(@visit) do |f| %>
+
+                <%= f.label :data_di_inizio %>
+                <%= f.date_field :dal, class: 'form-control',:value => (f.object.dal.strftime('%m/%d/%Y') if f.object.dal) %>
+                <%= errors_for @visit, :dal %><%if @visit.errors.any?%><br><%end%>
+
+                <br>
+                <%= f.label :data_di_fine %>
+                <%= f.date_field :al, class: 'form-control',:value => (f.object.al.strftime('%m/%d/%Y') if f.object.al) %>
+                <%= errors_for @visit, :al %><%if @visit.errors.any?%><br><%end%>
+
+                <br>
+                <%= f.label :Visitatore %>
+                <%= f.collection_select :visitor_id, Visitor.all, :id, :full_name, { :class=> "form-control", :include_blank => ''}%>
+                <%= errors_for @visit, :visitor_id %><%if @visit.errors.any?%><br><%end%>
+                <br>
+                <%= f.submit "Aggiungi la visita", class: "btn btn-primary btn-color" %>
+                <% end %>
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+
+                </div>
+                </div>
+                </div>
+                <% end %>
+
+
+                                                <!-- Table starts here -->
+
+<% if logged_in? %>
+<% if @employee.visits.any?%>
+<br><br><br><br><br>
+
+<button type="button" class="btn btn-primary btn-outline" id='tutte'>Tutte</button>
+<button type="button" class="btn btn-success outline" id='incorso'>In Corso</button>
+<button type="button" class="btn btn-info outline" id='confermate'>Confermate</button>
+<button type="button" class="btn btn-warning" id='archiviate'>Archiviate</button>
+<button type="button" class="btn btn-danger" id='daconfermare'>Da confermare</button>
+
+
+<table class="table2 display" id="visitTable">
+                    <thead>
+                    <tr>
+                        <th>Inizio</th>
+                        <th>Fine</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Matricola</th>
+                        <th>Status</th>
+
+                    </tr>
+                    </thead>
+
+<% @visits.each do |visit| %>
+                    <tr>
+                        <td>
+                        <%= visit.dal %>
+                        </td>
+
+                        <td>
+                        <%= visit.al %>
+                        </td>
+
+                        <td>
+                        <%= visit.visitor.nome %>
+                        </td>
+
+                        <td>
+                        <%= visit.visitor.cognome %>
+                        </td>
+
+                        <td>
+                        <%= visit.visitor.matricola %>
+                        </td>
+
+                        <td>
+                        <%= visit.status %>
+                        </td>
+                    </tr>
+<% end %>
+</table>
+<br><br>
+
+
+<% end %>
+<% end %>
 		</div>
 	</div>
 </div>

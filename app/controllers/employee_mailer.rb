@@ -5,4 +5,10 @@ class EmployeeMailer < ActionMailer::Base
     @employee = employee
     mail(:to => "#{employee.nome} <#{employee.email}>", :subject => "Registration Confirmation")
  end
+ 
+ def password_reset(employee)
+     @employee = employee
+     mail(:to => "#{employee.nome} <#{employee.email}>", :subject => "Password Reset")
+ end
+ 
 end

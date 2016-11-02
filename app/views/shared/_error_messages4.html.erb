@@ -1,0 +1,13 @@
+<% if @visit && @visit.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      The form contains <%= pluralize(@visit.errors.count, "error") %>.Open the modal for more details
+    </div>
+    <ul>
+        <% @visit.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+  </div>
+<% end %>

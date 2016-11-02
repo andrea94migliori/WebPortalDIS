@@ -1,6 +1,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
         <li class="sidebar">
+        <% if logged_in? %>
           <%=link_to employee_path(session[:employee_id],:act => "") ,class: "active" do%>
           <span class="glyphicon glyphicon-home"></span> Home
           <% end %>
@@ -28,6 +29,7 @@
         <li class="sidebar">
           <%=link_to employee_path(session[:employee_id],:act=>'mioAccount') do%>
           <span class="glyphicon glyphicon-pencil"></span> Il Mio Account
+          <% end %>
           <% end %>
         </li>
     </ul>

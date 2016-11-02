@@ -4,8 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+most_recent:
+    dal: '2016-10-25'
+    al: '2016-11-1'
+    created_at: <%= Time.zone.now %>
+    employee: andrew
+    visitor: frank

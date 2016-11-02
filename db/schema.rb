@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022122022) do
+ActiveRecord::Schema.define(version: 20161031194948) do
 
   create_table "employees", force: true do |t|
     t.datetime "created_at",                              null: false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20161022122022) do
     t.boolean  "email_confirmed"
     t.string   "confirm_token"
     t.string   "lingua",           default: "it"
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true
@@ -57,7 +59,6 @@ ActiveRecord::Schema.define(version: 20161022122022) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "nome"
-    t.string   "conome"
     t.string   "sesso"
     t.date     "dataNascita"
     t.string   "nazioneNascita"
@@ -70,6 +71,8 @@ ActiveRecord::Schema.define(version: 20161022122022) do
     t.string   "regione"
     t.string   "regioneResidenza"
     t.string   "password_digest"
+    t.integer  "employee_id"
+    t.string   "cognome"
   end
 
   add_index "visitors", ["email"], name: "index_visitors_on_email", unique: true
@@ -86,7 +89,7 @@ ActiveRecord::Schema.define(version: 20161022122022) do
     t.string   "status",      default: "Confermata"
   end
 
-  add_index "visits", ["idVisit"], name: "index_visits_on_idVisit", unique: true
+  add_index "visits", ["dal", "al", "visitor_id"], name: "index_visits_on_dal_and_al_and_visitor_id", unique: true
 
   create_table "vlans", force: true do |t|
     t.datetime "created_at", null: false

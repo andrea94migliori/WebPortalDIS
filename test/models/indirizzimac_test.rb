@@ -2,9 +2,8 @@ require 'test_helper'
 
 class IndirizzimacTest < ActiveSupport::TestCase
  def setup
-    @employee = Employee.create( nome: "Example2",cognome: "Example2" ,sesso: "M" ,dataNascita: Date.new(2001,2,3), 
-              nazioneNascita: "Italia",luogoNascita: "Roma",nazioneResidenza: "Italia",regione: "lazio" ,regioneResidenza: "lazio",cittaResidenza: "Roma",
-              indirizzo: "via roma 5",tipoAccount: "studente del DIS",matricola: "8234467",email: "employee2@example.com",
+    @employee = Employee.create( nome: "Example2",cognome: "Example2" ,sesso: "M" ,dataNascita: Date.new(2001,2,3), nazioneNascita: "Italia",luogoNascita: "Roma",nazioneResidenza: "Italia",regione: "lazio" ,  regioneResidenza: "lazio",cittaResidenza: "Roma",
+              indirizzo: "via roma 5", email: "employee2@example.com",
               password: "foobar", password_confirmation: "foobar")
    
     @vlan=Vlan.create(nome: 'Informatica2',vlanID: 33)

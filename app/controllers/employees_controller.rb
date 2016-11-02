@@ -1,10 +1,14 @@
 class EmployeesController < ApplicationController
+    after_action :update_status,  only: :show
     
     def show
         
         if logged_in?
             @employee = Employee.find(params[:id])
-            @indirizzimac=current_employee.indirizzimacs.new
+            @indirizzimac = current_employee.indirizzimacs.new
+            @visitor = current_employee.visitors.new
+            @visit = current_employee.visits.new
+            @visits = current_employee.visits.all
             if params[:act]=='mieiDati'
                 render 'mieiDati'
             elsif params[:act]=='miaRete'
@@ -65,6 +69,16 @@ class EmployeesController < ApplicationController
             render 'confirm'
         end
     end
+    
+    def update
+        @employee = Employee.find(params[:id])
+        if @employee.update_attributes(user_params)
+            flash[:success] = "Changes saved successfully"
+            render 'mioAccount'
+        else
+            render 'mioAccount'
+        end
+    end
 
   
     def confirm
@@ -86,12 +100,23 @@ class EmployeesController < ApplicationController
             redirect_to root_url
         end
     end
+    
+    
+    private
+    
+        def update_status
+            if @visits.any?
+                @visits.each do |visit|
+                    visit.check_visit_status
+                end
+            end
+        end
 
 #Strong parameters for Employee
     private
 
         def user_params
-            params.require(:employee).permit(:nome, :cognome, :sesso,:dataNascita,:nazioneNascita, :luogoNascita, :nazioneResidenza, :cittaResidenza,:indirizzo, :email, :password, :password_confirmation,:terms_of_service)
+            params.require(:employee).permit(:nome, :cognome, :sesso,:dataNascita,:nazioneNascita, :luogoNascita, :nazioneResidenza, :cittaResidenza,:indirizzo, :email, :password, :password_confirmation,:terms_of_service, :lingua, :reset_digest, :reset_sent_at)
         end
 
 #Strong parameters for IndirizziMac
@@ -105,9 +130,13 @@ class EmployeesController < ApplicationController
     private
     
         def visitor_params
-            params.require(:visitor).permit(:nome, :cognome, :sesso, :dataNascita, :nazioneNascita, :luogoNascita, nazioneResidenza, cittaResidenza, :indirizzo, :matricola, :email, :password, :password_confirmation)
+            params.require(:visitor).permit(:nome, :cognome, :sesso, :dataNascita, :nazioneNascita, :luogoNascita, :nazioneResidenza, :cittaResidenza, :indirizzo, :matricola, :email, :password, :employee_id)
         end
-    
 
-  
+#Strong parameters for Visit
+    private
+    
+        def visit_params
+            params.require(:visit).permit(:dal, :al, :visitor_id, :employee_id, :status)
+        end
 end

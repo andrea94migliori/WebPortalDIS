@@ -1,11 +1,15 @@
   Rails.application.routes.draw do
     
+  
+
     default_url_options :host => "localhost:3000"
     
     #StaticPages routes
     root    'static_pages#home'
     get     'normeAccessoRete'              => 'static_pages#normeAccessoRete'
     get     'privacyPolicy'                 => 'static_pages#privacyPolicy'
+    get     'password_resets/new'
+    get     'password_resets/edit'
 
     #Employees routes
     get     'employees/new'
@@ -21,6 +25,7 @@
     delete  'logout'                        => 'sessions#destroy'
     
     
+    
     #It means: for each entry of employee table, do a get on :confirm_email
     resources :employees do
         member do
@@ -29,8 +34,9 @@
     end
     
     #Limitation to CRUD operations
-    resources :indirizzimacs,   only: [:create, :destroy , :edit , :update]
-    resources :visitors,        only: [:create, :destroy , :edit , :update]
-    resources :visits,          only: [:create, :destroy , :edit , :update]
+    resources :indirizzimacs,       only: [:create, :destroy,:edit,             :update]
+    resources :visitors,            only: [:new,    :create, :destroy, :edit,   :update]
+    resources :visits,              only: [:new,    :create, :destroy, :edit,   :update]
+    resources :password_resets,     only: [:new,    :create, :edit,             :update]
 
   end

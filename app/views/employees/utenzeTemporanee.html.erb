@@ -1,46 +1,11 @@
 <div class="jumbotron3 text-center">
-  <div class="row">
-    <h1>La Mia Rete</h1>
-    <hr>
-    <%=render :partial =>"layouts/sidebar"%>
-    <div class="panel3">
-      <div class="panel-body">
-        <% if logged_in? %>
-          <%=render :partial =>"shared/error_messages"%>
-          <%=render :partial =>"shared/indirizzimac_form"%>
-          <a class="btn icon-btn btn-success pos" data-toggle="modal" data-target="#myModal">
-          <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-          Aggiungi Macaddress
-          </a>
-                <% if @employee.indirizzimacs.any?%>
-                  <br>
-                  <br>
-                  <input type="image" src="../../assets/all-60e837bf66f46383063f7c11d18cf3cf.png" id='col2_filter' title='all'>
-                  <input type="image" src="../../assets/pc-ef62c15ca061553d104a4301ed074569.png" id='col2_filterPC' title='pc'>
-                  <input type="image" src="../../assets/tablet-aef612ae1d3252024c2541311fcb4b04.png" id='col2_filterTablet' title='tablet'>
-                  <input type="image" src="../../assets/phone-9effafe63ba2de99c493929171d27eb1.png" id='col2_filterPhone' title='phone'>
-                  <input type="image" src="../../assets/vmachine-65b8effcde45dd509f00ee6af6a86a06.png" id='col2_filterVMAC' title='virtual machine'>
-                  <input type="image" src="../../assets/server-406e0e5c3292ea97ab536697881916dd.png" id='col2_filterServer' title='server'>
-                  <br><br>
-                  <label for="col4_filter">Filtra per VLAN:</label>
-                  <%= select_tag 'col4_filter',options_from_collection_for_select(Vlan.all, :nome, :nome),{:class=> 'form-control', :include_blank => ''}%>
-                  <table class="table2 display" id="example">
-                    <thead>
-                    <tr>
-                      <th>Hostname</th>
-                      <th>MacAddress</th>
-                      <th>Dispositivo</th>
-                      <th>Connessione</th>
-                      <th>Vlan</th>
-                    </tr>
-                    </thead>
-                  <%= render @indirizzimacs %>
-                  </table>
-                  <br><br>
-                <%= link_to "Modifica",employee_path(session[:employee_id],:act => 'miaRete',:del=>'true',:rel=>'true'),class: "btn red btn2"%>
-                <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="row">
+<h1>Utenze Temporanee</h1>
+<hr>
+<%=render :partial =>"layouts/sidebar"%>
+<div class="panel3">
+<div class="panel-body">
+</div>
+</div>
+</div>
 </div>
